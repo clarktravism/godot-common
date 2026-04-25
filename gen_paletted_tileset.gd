@@ -35,7 +35,6 @@ func _save_tileset() -> void:
 	var err = ResourceSaver.save(tileset)
 	if err != OK:
 		print("error saving:", err)
-	# this line causes editor errors in the terminal, but editor seems to be fine
 	var editor_resfs = EditorInterface.get_resource_filesystem()
 	editor_resfs.update_file(tileset.resource_path)
 	# throws errors

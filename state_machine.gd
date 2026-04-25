@@ -40,3 +40,8 @@ func get_state_tags() -> Array[StringName]:
 	if state:
 		return state.tags
 	return []
+
+func has_state_tag(tag: StringName) -> bool:
+	if state:
+		return state.tags.has(tag)
+	return false
