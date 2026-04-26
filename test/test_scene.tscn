@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://innk255qhwht"]
+[gd_scene load_steps=8 format=4 uid="uid://innk255qhwht"]
 
 [ext_resource type="TileSet" uid="uid://cjnuso8e5r3fy" path="res://test/ascii_8x8_tileset.tres" id="1_56kpk"]
 [ext_resource type="PackedScene" uid="uid://by1v1ltqmkq66" path="res://test/player_object.tscn" id="2_lr5j1"]
 [ext_resource type="Script" uid="uid://dq1uto1wck3g0" path="res://action_camera.gd" id="3_56kpk"]
 [ext_resource type="Script" uid="uid://f58iu76xxfm3" path="res://test/test_text_writer.gd" id="4_hldr7"]
-[ext_resource type="Script" uid="uid://byxyihwvlihjt" path="res://tilemap_writer.gd" id="5_xdggk"]
+[ext_resource type="Script" uid="uid://c75yhh7k7721y" path="res://tilemap_writer.gd" id="5_xdggk"]
+[ext_resource type="Script" uid="uid://byxyihwvlihjt" path="res://tilemap_cursor.gd" id="6_mwmxg"]
+[ext_resource type="PackedScene" uid="uid://ci6psk72wk1by" path="res://test/test_menu.tscn" id="6_xdggk"]
 
 [node name="TestScene" type="Node2D"]
 
@@ -24,11 +26,17 @@ metadata/_custom_type_script = "uid://dq1uto1wck3g0"
 [node name="TestTextWriter" type="Node2D" parent="."]
 script = ExtResource("4_hldr7")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="TestTextWriter"]
+[node name="TileMapWriter" type="TileMapLayer" parent="TestTextWriter"]
 tile_set = ExtResource("1_56kpk")
-
-[node name="TileMapWriter" type="Node" parent="TestTextWriter" node_paths=PackedStringArray("tile_map_layer")]
 script = ExtResource("5_xdggk")
-tile_map_layer = NodePath("../TileMapLayer")
+
+[node name="TileMapCursor" type="Node" parent="TestTextWriter" node_paths=PackedStringArray("tile_map_writer")]
+script = ExtResource("6_mwmxg")
+tile_map_writer = NodePath("../TileMapWriter")
 offset = Vector2i(0, 16)
 metadata/_custom_type_script = "uid://byxyihwvlihjt"
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="TestMenu" parent="UILayer" instance=ExtResource("6_xdggk")]
+visible = false
